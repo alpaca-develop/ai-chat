@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import { AuthSession } from '@/lib/auth'
 
 interface User {
   id: string
@@ -27,7 +28,7 @@ interface Message {
 }
 
 export const useUser = () => {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession() as { data: AuthSession | null, status: string }
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(false)
 
