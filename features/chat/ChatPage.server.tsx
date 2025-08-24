@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChatContainer } from './Chat.container'
+import { ChatWithAuthContainer } from './ChatWithAuth.container'
 
 interface ChatPageServerProps {
   initialMessages?: Array<{
@@ -19,7 +19,7 @@ export async function ChatPageServer({ initialMessages = [] }: ChatPageServerPro
   return (
     <div className="h-screen">
       <div className="hidden" data-server-info={JSON.stringify(serverInfo)} />
-      <ChatContainer />
+      <ChatWithAuthContainer />
     </div>
   )
 }

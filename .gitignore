@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/generated/prisma
+develop-7495-firebase-adminsdk-key.json

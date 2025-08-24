@@ -2,7 +2,7 @@ export interface Message {
   id: string
   content: string
   isUser: boolean
-  timestamp: Date
+  timestamp: string
 }
 
 export interface ChatState {

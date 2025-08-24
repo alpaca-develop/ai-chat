@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useRef, useEffect } from 'react'
 import { Message } from '@/types/chat.type'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -31,8 +33,9 @@ export const ChatPresentational: React.FC<ChatPresentationalProps> = ({
   }, [messages])
 
   return (
-    <div className="flex flex-col h-screen max-h-screen">
-      <div className="border-b bg-background p-4">
+    <div className="flex flex-col h-full">
+      {/* デスクトップ用ヘッダー */}
+      <div className="hidden lg:block border-b bg-background p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img 
@@ -41,7 +44,7 @@ export const ChatPresentational: React.FC<ChatPresentationalProps> = ({
               className="w-10 h-10 object-contain"
             />
             <div>
-              <h1 className="text-xl font-semibold">Gemini AI チャットボット</h1>
+              <h1 className="text-xl font-semibold">alpa AI</h1>
               <p className="text-sm text-muted-foreground">何でもお聞きください</p>
             </div>
           </div>
@@ -55,13 +58,28 @@ export const ChatPresentational: React.FC<ChatPresentationalProps> = ({
           )}
         </div>
       </div>
+      
+      {/* モバイル用シンプルヘッダー */}
+      <div className="lg:hidden border-b bg-background px-4 py-2">
+        <div className="flex justify-between items-center">
+          <p className="text-xs text-muted-foreground">何でもお聞きください</p>
+          {messages.length > 0 && (
+            <button
+              onClick={onClearMessages}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              履歴をクリア
+            </button>
+          )}
+        </div>
+      </div>
 
-      <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
-        <div className="space-y-4">
+      <ScrollArea ref={scrollAreaRef} className="flex-1 p-2 lg:p-4">
+        <div className="space-y-3 lg:space-y-4">
           {messages.length === 0 ? (
             <div className="text-center text-muted-foreground py-8">
-              <p>チャットを始めましょう！</p>
-              <p className="text-sm mt-2">下のテキストボックスにメッセージを入力してください。</p>
+              <p className="text-sm lg:text-base">チャットを始めましょう！</p>
+              <p className="text-xs lg:text-sm mt-2">下のテキストボックスにメッセージを入力してください。</p>
             </div>
           ) : (
             messages.map((message) => (
@@ -92,7 +110,10 @@ export const ChatPresentational: React.FC<ChatPresentationalProps> = ({
         </div>
       </ScrollArea>
 
-      <ChatInput onSendMessage={onSendMessage} disabled={isLoading} />
+      <ChatInput 
+        onSendMessage={onSendMessage} 
+        disabled={isLoading}
+      />
     </div>
   )
 }

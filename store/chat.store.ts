@@ -15,7 +15,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       id: `user-${Date.now()}`,
       content: content.trim(),
       isUser: true,
-      timestamp: new Date(),
+      timestamp: new Date().toISOString(),
     }
 
     set(state => ({
@@ -56,7 +56,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         id: `ai-${Date.now()}`,
         content: data.message,
         isUser: false,
-        timestamp: new Date(data.timestamp),
+        timestamp: data.timestamp || new Date().toISOString(),
       }
 
       set(state => ({
@@ -69,7 +69,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
         id: `error-${Date.now()}`,
         content: `申し訳ございません。エラーが発生しました: ${errorMessage}`,
         isUser: false,
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
       }
 
       set(state => ({
